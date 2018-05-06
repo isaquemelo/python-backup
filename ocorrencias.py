@@ -1,0 +1,5 @@
+preco = float(input())
+entrada = ((preco - (preco % 3))/3)+ (preco % 3)
+primeira = ((preco - (preco % 3))/3)
+segunda = ((preco - (preco % 3))/3)
+print ('{:.2f}\n{:.2f}\n{:.2f}\n'.format(entrada,primeira,segunda))

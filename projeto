@@ -1,0 +1,123 @@
+#registros inicias
+nomes = ["Isaque Melo","Joana da Silva", "Maria Eduarda"]
+idades =[17,40,25]
+filhos =[0,2,1]
+
+#implementação futura
+#pessoa = [nomes,idades,filhos]
+
+def voltar():
+    retornar = str(input("\nDesejas voltar ao menu? (Enter para continuar) ")).lower().strip()
+
+    if retornar in ["n", "nao", "não", "na", "no", "nai", "mao","nau", "\n"]:
+        finalizar()
+    else:
+        print ("Comando desconhecido talvez recebido. Seguindo procedimento padrão.")
+        return inicio()
+
+def finalizar():
+    print("O programa foi finalizado.")
+
+def cadastra():
+    nome = str(input("Nome: ").strip())
+    if len(nome) == 0 or len(nome) < 3:
+        while len(nome) == 0 or len(nome) < 3:
+            print("-" * len(mensagem))
+            print("Nome invalido. Tente novamente")
+            print("-" * len(mensagem))
+            nome = str(input("Nome: ").strip())
+    nomes.append(nome)
+
+    while True:
+        try:
+            idade = int(input("Idade: ").strip())
+            break
+        except ValueError:
+            print("-" * len(mensagem))
+            print("Idade invalida ou excedente, tente novamente")
+            print("-" * len(mensagem))
+
+    while idade <= 0 or idade >= 101:
+        print("Idade invalida ou excedente, tente novamente")
+        idade = int(input("Idade: "))
+    idades.append(idade)
+
+
+    filho = int(input("Nº de filhos: ").strip())
+    while filho < 0 or filho >= 11:
+        print("Entrada invalida ou excedente, tente novamente")
+        filho = int(input("Nº de filhos: "))
+    filhos.append(filho)
+
+    print ('Cadastro efetuado com sucesso:\n Nome: {} | Idade: {} anos | Filhos: {}'.format( nome, idade, filho))
+    voltar()
+
+def vernomes() :
+    print ("\nVer Nomes cadastrados:")
+    for i in nomes:
+        print ("Nome: ", i)
+    voltar()
+
+def veridades():
+    print("\nVer Idades cadastradas:")
+    h = int(0)
+    for i in idades:
+        h +=1
+        print ('Idade {}:'.format(h), i)
+    voltar()
+
+def mediaidades():
+    mediaidadess = round((sum(idades) / len(idades)),2)
+    print ('A média de idades das pessoas cadastradas é: {} anos'.format(mediaidadess))
+    voltar()
+
+def porcentagemfilhos():
+    numerodepessoas = len(nomes)
+    temfilhos = 0
+    for i in filhos:
+        if i >= 1:
+            temfilhos += 1
+    porcetagem = round((temfilhos / numerodepessoas),3)
+
+    print('{}% ou {}/{} das pessoas cadastradas possuem filhos'.format(porcetagem*100,temfilhos,numerodepessoas))
+    voltar()
+
+def inicio():
+    print("\nOpções do Sistema:", "\n1 - Cadastrar pessoa", "\n2 - Listar Nomes", "\n3 - Listar Idades", "\n4 - Media de Idades", "\n5 - Porcentagem de Pessoas com filhos", "\n6 - Finalizar programa","\n")
+    while True:
+        try:
+            option = int(input("Digite a opção desejada: "))
+            break
+        except ValueError:
+            print("-" * len(mensagem), ">")
+            print ("Opção inválida. Digite algum número da lista.")
+            print("-" * len(mensagem), ">")
+
+    if option == 1:
+        cadastra()
+    elif option == 2:
+        vernomes()
+    elif option == 3:
+        veridades()
+    elif option == 4:
+        mediaidades()
+    elif option == 5:
+        porcentagemfilhos()
+
+    elif option == 6:
+        finalizar()
+    else:
+        print("-" * len(mensagem), ">", "\n")
+        print ("Opção não programada. Selecione uma opção valida\n")
+        print("-" * len(mensagem), ">")
+        return inicio()
+
+    return
+
+mensagem = str("Bem vindo ao cadastro de pessoas por lista - v0.0")
+versao = str  ("1º Periodo de Engenharia de Computação - IFPB")
+print ("-"*len(mensagem))
+print(mensagem)
+print(versao)
+print ("-"*len(mensagem))
+inicio()
